@@ -39,7 +39,7 @@ func (c *Command) AddCommand(subCommand *Command) *Command {
 	return c
 }
 
-// 执行当前命令
+// Execute 执行当前命令
 func (c *Command) Execute() error {
 	return c.Cmd.Execute()
 }
