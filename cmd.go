@@ -12,23 +12,15 @@ func NewRootCmd(use, short, version string) *Command {
 	return root
 }
 
-// CmdStringFlag 命令的字符串参数
-type CmdStringFlag struct {
-	P               *string
-	Name, Shorthand string
-	Value           string
-	Usage           string
-}
-
 // Command 命令的包装类
 type Command struct {
 	Cmd *cobra.Command
 }
 
 // Bind 绑定指定的参数，可指定具体的字符串参数
-func (c *Command) Bind(flags ...CmdStringFlag) *Command {
+func (c *Command) Bind(flags ...CmdFlag) *Command {
 	for _, flag := range flags {
-		c.Cmd.Flags().StringVarP(flag.P, flag.Name, flag.Shorthand, flag.Value, flag.Usage)
+		flag.Bind(c.Cmd)
 	}
 	return c
 }
