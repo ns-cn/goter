@@ -18,7 +18,7 @@ type Command struct {
 }
 
 // Bind 绑定指定的参数，可指定具体的字符串参数
-func (c *Command) Bind(flags ...CmdFlag) *Command {
+func (c *Command) Bind(flags ...CmdFlagBinder) *Command {
 	for _, flag := range flags {
 		flag.Bind(c.Cmd)
 	}
