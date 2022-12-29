@@ -8,33 +8,37 @@ type CmdFlag interface {
 }
 
 // NewCmdFlagString 创建新的命令行字符串参数
-func NewCmdFlagString(p *string, value string, name string, shorthand string, usage string) CmdFlagString {
-	return CmdFlagString{P: p, Name: name, Shorthand: shorthand, Usage: usage, Value: value}
+func NewCmdFlagString(p *string, defaultValue string, name string, shorthand string, usage string) CmdFlagString {
+	return CmdFlagString{P: p, Value: defaultValue, CmdFlagSign: CmdFlagSign{Name: name, Shorthand: shorthand, Usage: usage}}
 }
 
 // NewCmdFlagStringSlice 创建新的命令行字符串数组参数
-func NewCmdFlagStringSlice(p *[]string, value []string, name string, shorthand string, usage string) CmdFlagStringSlice {
-	return CmdFlagStringSlice{P: p, Name: name, Shorthand: shorthand, Usage: usage, Value: value}
+func NewCmdFlagStringSlice(p *[]string, defaultValue []string, name string, shorthand string, usage string) CmdFlagStringSlice {
+	return CmdFlagStringSlice{P: p, Value: defaultValue, CmdFlagSign: CmdFlagSign{Name: name, Shorthand: shorthand, Usage: usage}}
 }
 
 // NewCmdFlagBool 创建新的命令行bool参数
-func NewCmdFlagBool(p *bool, value bool, name string, shorthand string, usage string) CmdFlagBool {
-	return CmdFlagBool{P: p, Name: name, Shorthand: shorthand, Usage: usage, Value: value}
+func NewCmdFlagBool(p *bool, defaultValue bool, name string, shorthand string, usage string) CmdFlagBool {
+	return CmdFlagBool{P: p, Value: defaultValue, CmdFlagSign: CmdFlagSign{Name: name, Shorthand: shorthand, Usage: usage}}
 }
 
 // NewCmdFlagInt 创建新的命令行int参数
 func NewCmdFlagInt(p *int, defaultValue int, name string, shorthand string, usage string) CmdFlagInt {
-	return CmdFlagInt{P: p, Name: name, Shorthand: shorthand, Usage: usage, Value: defaultValue}
+	return CmdFlagInt{P: p, Value: defaultValue, CmdFlagSign: CmdFlagSign{Name: name, Shorthand: shorthand, Usage: usage}}
+}
+
+type CmdFlagSign struct {
+	Name      string
+	Shorthand string
+	Usage     string
 }
 
 // CmdFlagString 命令的字符串参数
 type CmdFlagString struct {
 	CmdFlag
-	Name      string
-	Shorthand string
-	Usage     string
-	P         *string
-	Value     string
+	CmdFlagSign
+	P     *string
+	Value string
 }
 
 func (f CmdFlagString) Bind(c *cobra.Command) {
@@ -44,11 +48,9 @@ func (f CmdFlagString) Bind(c *cobra.Command) {
 // CmdFlagStringSlice 命令的字符串数组参数
 type CmdFlagStringSlice struct {
 	CmdFlag
-	Name      string
-	Shorthand string
-	Usage     string
-	P         *[]string
-	Value     []string
+	CmdFlagSign
+	P     *[]string
+	Value []string
 }
 
 func (f CmdFlagStringSlice) Bind(c *cobra.Command) {
@@ -58,11 +60,9 @@ func (f CmdFlagStringSlice) Bind(c *cobra.Command) {
 // CmdFlagBool 命令的bool类型参数
 type CmdFlagBool struct {
 	CmdFlag
-	Name      string
-	Shorthand string
-	Usage     string
-	P         *bool
-	Value     bool
+	CmdFlagSign
+	P     *bool
+	Value bool
 }
 
 func (f CmdFlagBool) Bind(c *cobra.Command) {
@@ -72,11 +72,9 @@ func (f CmdFlagBool) Bind(c *cobra.Command) {
 // CmdFlagInt 命令的int类型参数
 type CmdFlagInt struct {
 	CmdFlag
-	Name      string
-	Shorthand string
-	Usage     string
-	P         *int
-	Value     int
+	CmdFlagSign
+	P     *int
+	Value int
 }
 
 func (f CmdFlagInt) Bind(c *cobra.Command) {
