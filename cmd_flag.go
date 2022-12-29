@@ -43,7 +43,7 @@ type CmdFlagString struct {
 }
 
 func (f CmdFlagString) Bind(c *cobra.Command) {
-	c.Flags().StringVarP(&(f.Value), f.Name, f.Shorthand, f.defaultValue, f.Usage)
+	c.Flags().StringVarP(&f.Value, f.Name, f.Shorthand, f.defaultValue, f.Usage)
 }
 
 // CmdFlagStringSlice 命令的字符串数组参数
@@ -55,7 +55,7 @@ type CmdFlagStringSlice struct {
 }
 
 func (f CmdFlagStringSlice) Bind(c *cobra.Command) {
-	c.Flags().StringSliceVarP(&(f.Value), f.Name, f.Shorthand, f.defaultValue, f.Usage)
+	c.Flags().StringSliceVarP(&f.Value, f.Name, f.Shorthand, f.defaultValue, f.Usage)
 }
 
 // CmdFlagBool 命令的bool类型参数
@@ -67,7 +67,7 @@ type CmdFlagBool struct {
 }
 
 func (f CmdFlagBool) Bind(c *cobra.Command) {
-	c.Flags().BoolVarP(&(f.Value), f.Name, f.Shorthand, f.defaultValue, f.Usage)
+	c.Flags().BoolVarP(&f.Value, f.Name, f.Shorthand, f.defaultValue, f.Usage)
 }
 
 // CmdFlagInt 命令的int类型参数
@@ -79,5 +79,5 @@ type CmdFlagInt struct {
 }
 
 func (f CmdFlagInt) Bind(c *cobra.Command) {
-	c.Flags().IntVarP(&(f.Value), f.Name, f.Shorthand, f.defaultValue, f.Usage)
+	c.Flags().IntVarP(&f.Value, f.Name, f.Shorthand, f.defaultValue, f.Usage)
 }
