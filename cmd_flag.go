@@ -27,6 +27,7 @@ type CmdFlagBinder interface {
 	Bind(c *cobra.Command)
 }
 
+// CmdFlagSign 命令参数标识符
 type CmdFlagSign struct {
 	Name      string
 	Shorthand string
