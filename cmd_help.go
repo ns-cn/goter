@@ -22,5 +22,5 @@ func newVersionCmd(use, version string) *Command {
 				fmt.Println(fmt.Sprintf("%s version: v%s", use, version))
 			}
 		},
-	}}).Bind(CmdFlagBool{Name: "runtime", Shorthand: "R", Usage: "show runtime or not", P: &envVersionShowRuntime, Value: false})
+	}}).Bind(NewCmdFlagBool(false, "runtime", "R", "show runtime or not"))
 }
