@@ -38,13 +38,12 @@ type CmdFlagSign struct {
 type CmdFlagString struct {
 	CmdFlagSign
 	CmdFlagBinder
-	Value        *string
+	Value        string
 	defaultValue string
 }
 
-func (f CmdFlagString) Bind(c *cobra.Command) {
-	f.Value = new(string)
-	c.Flags().StringVarP(f.Value, f.Name, f.Shorthand, f.defaultValue, f.Usage)
+func (f *CmdFlagString) Bind(c *cobra.Command) {
+	c.Flags().StringVarP(&f.Value, f.Name, f.Shorthand, f.defaultValue, f.Usage)
 }
 
 // CmdFlagStringSlice 命令的字符串数组参数
@@ -55,7 +54,7 @@ type CmdFlagStringSlice struct {
 	defaultValue []string
 }
 
-func (f CmdFlagStringSlice) Bind(c *cobra.Command) {
+func (f *CmdFlagStringSlice) Bind(c *cobra.Command) {
 	c.Flags().StringSliceVarP(&f.Value, f.Name, f.Shorthand, f.defaultValue, f.Usage)
 }
 
@@ -67,7 +66,7 @@ type CmdFlagBool struct {
 	defaultValue bool
 }
 
-func (f CmdFlagBool) Bind(c *cobra.Command) {
+func (f *CmdFlagBool) Bind(c *cobra.Command) {
 	c.Flags().BoolVarP(&f.Value, f.Name, f.Shorthand, f.defaultValue, f.Usage)
 }
 
@@ -79,6 +78,6 @@ type CmdFlagInt struct {
 	defaultValue int
 }
 
-func (f CmdFlagInt) Bind(c *cobra.Command) {
+func (f *CmdFlagInt) Bind(c *cobra.Command) {
 	c.Flags().IntVarP(&f.Value, f.Name, f.Shorthand, f.defaultValue, f.Usage)
 }
