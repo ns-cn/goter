@@ -38,12 +38,13 @@ type CmdFlagSign struct {
 type CmdFlagString struct {
 	CmdFlagSign
 	CmdFlagBinder
-	Value        string
+	Value        *string
 	defaultValue string
 }
 
 func (f CmdFlagString) Bind(c *cobra.Command) {
-	c.Flags().StringVarP(&f.Value, f.Name, f.Shorthand, f.defaultValue, f.Usage)
+	f.Value = new(string)
+	c.Flags().StringVarP(f.Value, f.Name, f.Shorthand, f.defaultValue, f.Usage)
 }
 
 // CmdFlagStringSlice 命令的字符串数组参数
