@@ -12,6 +12,11 @@ func NewCmdFlagString(p *string, value string, name string, shorthand string, us
 	return CmdFlagString{P: p, Name: name, Shorthand: shorthand, Usage: usage, Value: value}
 }
 
+// NewCmdFlagStringSlice 创建新的命令行字符串数组参数
+func NewCmdFlagStringSlice(p *[]string, value []string, name string, shorthand string, usage string) CmdFlagStringSlice {
+	return CmdFlagStringSlice{P: p, Name: name, Shorthand: shorthand, Usage: usage, Value: value}
+}
+
 // NewCmdFlagBool 创建新的命令行bool参数
 func NewCmdFlagBool(p *bool, value bool, name string, shorthand string, usage string) CmdFlagBool {
 	return CmdFlagBool{P: p, Name: name, Shorthand: shorthand, Usage: usage, Value: value}
@@ -34,6 +39,20 @@ type CmdFlagString struct {
 
 func (f CmdFlagString) Bind(c *cobra.Command) {
 	c.Flags().StringVarP(f.P, f.Name, f.Shorthand, f.Value, f.Usage)
+}
+
+// CmdFlagStringSlice 命令的字符串数组参数
+type CmdFlagStringSlice struct {
+	CmdFlag
+	Name      string
+	Shorthand string
+	Usage     string
+	P         *[]string
+	Value     []string
+}
+
+func (f CmdFlagStringSlice) Bind(c *cobra.Command) {
+	c.Flags().StringSliceVarP(f.P, f.Name, f.Shorthand, f.Value, f.Usage)
 }
 
 // CmdFlagBool 命令的bool类型参数
