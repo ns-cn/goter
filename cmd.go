@@ -6,7 +6,15 @@ import (
 
 // NewRootCmd 创建根命令，包含一个根命令以及根命令下的版本信息查看命令
 func NewRootCmd(use, short, version string) *Command {
-	root := newRootCmd(use, short)
+	root := newRootCmd(use, short, nil)
+	commandVersion := newVersionCmd(use, version)
+	root.AddCommand(commandVersion)
+	return root
+}
+
+// NewRootCmdWithAction 自定义命令执行内容的根目录创建
+func NewRootCmdWithAction(use, short, version string, action func(*cobra.Command, []string)) *Command {
+	root := newRootCmd(use, short, action)
 	commandVersion := newVersionCmd(use, version)
 	root.AddCommand(commandVersion)
 	return root
